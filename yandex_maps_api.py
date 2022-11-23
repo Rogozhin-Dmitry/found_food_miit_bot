@@ -43,10 +43,12 @@ def make_response(user_id):
                         mess_text += telephone['formatted'] + ' '
                     mess_text = mess_text[:-1]
                     mess_text += '\n'
-            # if 'Hours' in place['properties']['CompanyMetaData']:
-            #     send_mess(user_id, str(place['properties']['CompanyMetaData']['Hours']['text']))
-            #     mess_text += 'Часы работы: ' + place['properties']['CompanyMetaData']['Hours']['text']
-            #     TODO разобраться с этой хернёй
+            try:
+                if 'Hours' in place['properties']['CompanyMetaData']:
+                    send_mess(user_id, str(place['properties']['CompanyMetaData']['Hours']['text']))
+                    mess_text += 'Часы работы: ' + place['properties']['CompanyMetaData']['Hours']['text']
+            except Exception as e:
+                print(e)
             mess_text += '\n\n'
         if data['properties']['ResponseMetaData']['SearchResponse']['found'] >= 4:
             send_mess(user_id, mess_text, config.start_keys)
