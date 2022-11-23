@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Все метки</title>
+    <link rel="icon" href="static/unnamed.ico" type="image/x-icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ea2d8f7a-b625-40bd-9ca1-6083f9c70202"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var myMap;
+
+        function init() {
+            myMap = new ymaps.Map("map", {
+                center: [55.791112651328916, 37.62000253448485],
+                zoom: 15,
+                controls: []
+            }, {
+                balloonMaxWidth: 200,
+                searchControlProvider: 'yandex#search'
+            });
+
+            var geolocationControl = new ymaps.control.GeolocationControl({});
+            geolocationControl.events.add('locationchange');
+            myMap.controls.add(geolocationControl);
+            myMap.controls.add(new ymaps.control.ZoomControl({}));
+            myMap.controls.add(new ymaps.control.SearchControl({}));
+            myMap.controls.add(new ymaps.control.RulerControl({}));
+            myMap.controls.add(new ymaps.control.TypeSelector({}));
+            var myPlacemark = new ymaps.Placemark([55.791112651328916, 37.62000253448485], {preset: 'islands#greenIcon'})
+            myMap.geoObjects.add(myPlacemark);
+            
+var myPlacemark = new ymaps.Placemark([55.793686, 37.61888], {preset: 'islands#redIcon'})
+myMap.geoObjects.add(myPlacemark);
+
+        }
+    </script>
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>
